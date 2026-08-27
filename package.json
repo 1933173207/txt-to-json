@@ -1,0 +1,94 @@
+{
+    "name": "txt-to-json",
+    "displayName": "TXT To JSON",
+    "description": "When opening a TXT file, use JSON language to open it, instead of text.",
+    "version": "0.2.1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/1933173207/txt-to-json"
+    },
+    "author": {
+        "name": "Jacky Li",
+        "email": "1933173207@qq.com"
+    },
+    "license": "MIT",
+    "publisher": "jacky-6092",
+    "icon": "images/icon.png",
+    "engines": {
+        "vscode": "^1.106.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "json",
+        "txt",
+        "toggle"
+    ],
+    "activationEvents": [
+        "onLanguage:plaintext",
+        "onLanguage:json"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "txt-to-json.toJson",
+                "title": "Convert TXT to JSON",
+                "category": "JSON TXT Toggler"
+            },
+            {
+                "command": "txt-to-json.toText",
+                "title": "Convert JSON to TXT",
+                "category": "JSON TXT Toggler"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "txt-to-json.toJson",
+                "key": "alt+shift+j",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "txt-to-json.toText",
+                "key": "alt+shift+t",
+                "when": "editorTextFocus"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "TXT To JSON Configuration",
+            "properties": {
+                "txtToJson.autoBehavior": {
+                    "type": "string",
+                    "default": "prompt",
+                    "enum": [
+                        "prompt",
+                        "auto",
+                        "none"
+                    ],
+                    "enumDescriptions": [
+                        "弹出提示窗口询问是否切换",
+                        "自动切换为 JSON 模式，不询问",
+                        "不做任何操作"
+                    ],
+                    "description": "打开 TXT 文件时的行为"
+                },
+                "txtToJson.useChinese": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否使用中文提示信息"
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.85.0",
+        "typescript": "^5.0.0"
+    }
+}
