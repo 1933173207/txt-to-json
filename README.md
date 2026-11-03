@@ -1,6 +1,6 @@
 # TXT to JSON
 
-[![Version](https://img.shields.io/badge/version-0.2.1-green.svg)](https://marketplace.visualstudio.com/items?itemName=[jacky-6092].txt-to-json)
+[![Version](https://img.shields.io/badge/version-0.2.2-green.svg)](https://marketplace.visualstudio.com/items?itemName=[jacky-6092].txt-to-json)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 一键将 `_json.txt` 文件在纯文本和 JSON 语法高亮模式之间快速切换。
@@ -13,6 +13,7 @@
 - 🌐 **多语言支持**：中英文界面可切换
 - 📊 **状态栏集成**：状态栏显示当前模式，点击即可切换
 - ⚙️ **灵活配置**：多种自动化行为可选
+- 🔇 **静默模式**：可关闭所有提示消息，安静地完成切换
 
 ## 🎯 支持的文件格式
 
@@ -55,6 +56,7 @@
 |--------|------|--------|------|
 | `txtToJson.useChinese` | boolean | `false` | `true`：中文界面<br>`false`：英文界面 |
 | `txtToJson.autoBehavior` | enum | `"prompt"` | `"prompt"`：弹出提示询问<br>`"auto"`：自动切换<br>`"none"`：不自动切换 |
+| `txtToJson.silent` | boolean | `false` | `true`：静默模式，不弹出任何提示消息<br>`false`：正常显示提示消息 |
 
 ### 配置示例
 

@@ -2,7 +2,7 @@
     "name": "txt-to-json",
     "displayName": "TXT To JSON",
     "description": "When opening a TXT file, use JSON language to open it, instead of text.",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "repository": {
         "type": "git",
         "url": "https://github.com/1933173207/txt-to-json"
@@ -78,6 +78,11 @@
                     "type": "boolean",
                     "default": false,
                     "description": "是否使用中文提示信息"
+                },
+                "txtToJson.silent": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否启用静默模式（勾选后不再弹出提示消息）"
                 }
             }
         }

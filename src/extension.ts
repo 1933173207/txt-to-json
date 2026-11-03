@@ -98,6 +98,13 @@ function get_messages(): typeof logging_messages.zh {
 }
 
 
+// Check if silent mode is enabled, which suppresses all informational messages.
+function is_silent(): boolean {
+    const config = vscode.workspace.getConfiguration("txtToJson");
+    return config.get<boolean>("silent", false);
+}
+
+
 // This method is called when your extension is activated.
 export function activate(context: vscode.ExtensionContext) {
     console.log("Extension \"txt-to-json\" is now active!");
@@ -129,7 +136,9 @@ export function activate(context: vscode.ExtensionContext) {
 
         try {
             await vscode.languages.setTextDocumentLanguage(document, "json");
-            vscode.window.showInformationMessage(msg.switched_to_json(file_name));
+            if (!is_silent()) {
+                vscode.window.showInformationMessage(msg.switched_to_json(file_name));
+            }
         } catch (error) {
             const message = error instanceof Error?error.message:String(error);
             vscode.window.showErrorMessage(msg.switch_failed(message));
@@ -163,7 +172,9 @@ export function activate(context: vscode.ExtensionContext) {
 
         try {
             await vscode.languages.setTextDocumentLanguage(document, "plaintext");
-            vscode.window.showInformationMessage(msg.switched_to_text(file_name));
+            if (!is_silent()) {
+                vscode.window.showInformationMessage(msg.switched_to_text(file_name));
+            }
         } catch (error) {
             const message = error instanceof Error?error.message:String(error);
             vscode.window.showErrorMessage(msg.switch_failed(message));
@@ -195,7 +206,9 @@ export function activate(context: vscode.ExtensionContext) {
             case "auto": {
                 try {
                     await vscode.languages.setTextDocumentLanguage(document, "json");
-                    vscode.window.showInformationMessage(msg.auto_switched_to_json(file_name));
+                    if (!is_silent()) {
+                        vscode.window.showInformationMessage(msg.auto_switched_to_json(file_name));
+                    }
                 } catch (error) {
                     const message = error instanceof Error?error.message:String(error);
                     vscode.window.showErrorMessage(msg.switch_failed(message));
@@ -203,6 +216,11 @@ export function activate(context: vscode.ExtensionContext) {
                 break;
             }
             case "prompt": {
+                // In silent mode, do not show the prompt dialog.
+                if (is_silent()) {
+                    break;
+                }
+
                 const choice = await vscode.window.showInformationMessage(
                     msg.detected_prompt(file_name),
                     msg.switch_button,
